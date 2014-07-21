@@ -59,8 +59,9 @@ def numerals(nNumero, lFemenino=0, andword='con', money=False, currency_word='bo
     if type(nNumero) == float:
         float_number = str(nNumero).split('.')
         nNumero = int(float_number[0])
-        cRes = _numerals(nNumero,lFemenino)
-        dec = int(float_number[1])
+        if nNumero == 0: cRes = "cero"
+        else: cRes = _numerals(nNumero,lFemenino)
+        dec = int(float_number[1])            
         if money:
             currency_word = currency_word.strip()
             cents_word = cents_word.strip()
@@ -68,14 +69,16 @@ def numerals(nNumero, lFemenino=0, andword='con', money=False, currency_word='bo
             if nNumero != 1:
                 currency_word = inflector_obj.pluralize(currency_word)
             cRes += ' '+currency_word
-        cRes += ' '+andword.strip()+' '+_numerals(dec,lFemenino)
+        if dec != 0: 
+            cRes += ' '+andword.strip()+' '+_numerals(dec,lFemenino)
         if money:
             if dec != 1:
                 cents_word = inflector_obj.pluralize(cents_word)
             cRes += ' '+cents_word
     else:               
         if type(nNumero) == str: nNumero = long(nNumero)
-        cRes = _numerals(nNumero,lFemenino)
+        if nNumero==0: cRes = "cero"
+        else: cRes = _numerals(nNumero,lFemenino)
         if money:
             currency_word = currency_word.strip()
             inflector_obj = Inflector(Inflector=Spanish)
