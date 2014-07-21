@@ -92,7 +92,7 @@ def numerals(nNumero, lFemenino=0, andword='con', money=False, currency_word='bo
     if not lFemenino and nNumero%10 == 1 and nNumero%100!=11 and not money:
         cRes += "o"
 
-    return cRes
+    return cRes.decode('utf-8')
 
 
 # Función auxiliar recursiva
