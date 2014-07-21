@@ -68,13 +68,14 @@ def numerals(nNumero, lFemenino=0, andword='con', money=False, currency_word='bo
             inflector_obj = Inflector(Inflector=Spanish)
             if nNumero != 1:
                 currency_word = inflector_obj.pluralize(currency_word)
+            if cRes[-8:] == 'millones': cRes += ' de'
             cRes += ' '+currency_word
         if dec != 0: 
             cRes += ' '+andword.strip()+' '+_numerals(dec,lFemenino)
         if money:
             if dec != 1:
                 cents_word = inflector_obj.pluralize(cents_word)
-            cRes += ' '+cents_word
+            if dec != 0: cRes += ' '+cents_word
     else:               
         if type(nNumero) == str: nNumero = long(nNumero)
         if nNumero==0: cRes = "cero"
@@ -84,6 +85,7 @@ def numerals(nNumero, lFemenino=0, andword='con', money=False, currency_word='bo
             inflector_obj = Inflector(Inflector=Spanish)
             if nNumero != 1:
                 currency_word = inflector_obj.pluralize(currency_word)
+            if cRes[-8:] == 'millones': cRes += ' de'
             cRes += ' '+currency_word
 
     # Excepciones a considerar
